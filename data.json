@@ -1,0 +1,34 @@
+{
+  "genres": [
+    { "id": "ai",     "name": "AIツール",  "order": 0 },
+    { "id": "design", "name": "デザイン",  "order": 1 },
+    { "id": "news",   "name": "ニュース",  "order": 2 },
+    { "id": "work",   "name": "仕事",      "order": 3 }
+  ],
+  "bookmarks": [
+    {
+      "id": "sample1",
+      "genreId": "ai",
+      "title": "Claude",
+      "url": "https://claude.ai",
+      "description": "Anthropic のAIアシスタント",
+      "order": 0
+    },
+    {
+      "id": "sample2",
+      "genreId": "ai",
+      "title": "ChatGPT",
+      "url": "https://chat.openai.com",
+      "description": "OpenAI のAIチャット",
+      "order": 1
+    },
+    {
+      "id": "sample3",
+      "genreId": "design",
+      "title": "Figma",
+      "url": "https://figma.com",
+      "description": "UIデザインツール",
+      "order": 0
+    }
+  ]
+}

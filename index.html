@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Favorites</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ロック画面 -->
+  <div id="lockScreen" class="lock-screen">
+    <div class="lock-card">
+      <div class="lock-icon">⭐</div>
+      <h1>My Favorites</h1>
+      <p id="lockMsg">パスワードを入力してください</p>
+      <input type="password" id="pwInput" placeholder="パスワード" autocomplete="current-password">
+      <button id="unlockBtn" class="btn-primary">ロック解除</button>
+      <p id="lockErr" class="error-msg hidden">パスワードが違います</p>
+    </div>
+  </div>
+
+  <!-- メインアプリ -->
+  <div id="app" class="hidden">
+    <header>
+      <span class="app-name">⭐ My Favorites</span>
+      <div class="header-right">
+        <button id="syncBtn" class="header-btn">⟳ 同期</button>
+        <button id="settingsBtn" class="header-btn">⚙ 設定</button>
+        <button id="lockBtn" class="header-btn">🔒</button>
+      </div>
+    </header>
+
+    <div class="genre-bar">
+      <div class="genre-tabs" id="genreTabs"></div>
+      <button id="addGenreBtn" class="genre-add-btn" title="ジャンルを追加">＋</button>
+    </div>
+
+    <main id="main">
+      <div class="cards" id="cards"></div>
+      <div class="empty-state hidden" id="emptyState">
+        <p>まだお気に入りがありません</p>
+        <button class="btn-primary" id="emptyAddBtn">＋ 追加する</button>
+      </div>
+    </main>
+
+    <button class="fab" id="addBtn" title="お気に入りを追加">＋</button>
+  </div>
+
+  <!-- モーダル：お気に入り追加・編集 -->
+  <div id="bookmarkModal" class="modal-overlay hidden">
+    <div class="modal">
+      <h2 id="bmHeading">お気に入りを追加</h2>
+      <div class="form-group">
+        <label>URL</label>
+        <input type="url" id="bUrl" placeholder="https://example.com">
+      </div>
+      <div class="form-group">
+        <label>タイトル</label>
+        <input type="text" id="bTitle" placeholder="サイト名">
+      </div>
+      <div class="form-group">
+        <label>説明（任意）</label>
+        <input type="text" id="bDesc" placeholder="一言メモ">
+      </div>
+      <div class="form-group">
+        <label>ジャンル</label>
+        <select id="bGenre"></select>
+      </div>
+      <div class="modal-actions">
+        <button id="saveBmBtn" class="btn-primary">保存</button>
+        <button id="deleteBmBtn" class="btn-danger hidden">削除</button>
+        <button id="cancelBmBtn" class="btn-secondary">キャンセル</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- モーダル：ジャンル追加・編集 -->
+  <div id="genreModal" class="modal-overlay hidden">
+    <div class="modal">
+      <h2 id="genreHeading">ジャンルを追加</h2>
+      <div class="form-group">
+        <label>ジャンル名</label>
+        <input type="text" id="gName" placeholder="例：仕事、趣味など">
+      </div>
+      <div class="modal-actions">
+        <button id="saveGenreBtn" class="btn-primary">保存</button>
+        <button id="deleteGenreBtn" class="btn-danger hidden">削除</button>
+        <button id="cancelGenreBtn" class="btn-secondary">キャンセル</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- モーダル：設定 -->
+  <div id="settingsModal" class="modal-overlay hidden">
+    <div class="modal">
+      <h2>⚙ 設定</h2>
+
+      <h3>🔑 パスワード変更</h3>
+      <div class="form-group">
+        <label>新しいパスワード</label>
+        <input type="password" id="newPw" placeholder="新しいパスワード">
+      </div>
+      <div class="form-group">
+        <label>確認（もう一度）</label>
+        <input type="password" id="newPwConfirm" placeholder="もう一度入力">
+      </div>
+      <button id="changePwBtn" class="btn-secondary">パスワードを変更</button>
+      <p id="pwMsg" class="status-msg hidden"></p>
+
+      <hr>
+
+      <h3>🐙 GitHub 同期設定</h3>
+      <p class="hint">
+        GitHub Pages のリポジトリに <code>data.json</code> を保存して<br>
+        どのデバイスからでも同じデータを使えます。<br>
+        Personal Access Token（fine-grained、Contents: Read &amp; Write）が必要です。
+      </p>
+      <div class="form-group">
+        <label>GitHubユーザー名</label>
+        <input type="text" id="ghOwner" placeholder="setoband3">
+      </div>
+      <div class="form-group">
+        <label>リポジトリ名</label>
+        <input type="text" id="ghRepo" placeholder="my-favorites">
+      </div>
+      <div class="form-group">
+        <label>Personal Access Token</label>
+        <input type="password" id="ghToken" placeholder="ghp_xxxxxxxxxxxx">
+      </div>
+      <div class="btn-row">
+        <button id="saveGhBtn" class="btn-secondary">GitHub設定を保存</button>
+        <button id="pullGhBtn" class="btn-secondary">GitHubから読み込む</button>
+      </div>
+      <p id="ghMsg" class="status-msg hidden"></p>
+
+      <hr>
+
+      <div class="modal-actions">
+        <button id="closeSettingsBtn" class="btn-primary">閉じる</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
