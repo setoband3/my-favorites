@@ -1,9 +1,25 @@
 {
   "genres": [
-    { "id": "ai",     "name": "AIツール",  "order": 0 },
-    { "id": "design", "name": "デザイン",  "order": 1 },
-    { "id": "news",   "name": "ニュース",  "order": 2 },
-    { "id": "work",   "name": "仕事",      "order": 3 }
+    {
+      "id": "ai",
+      "name": "AIツール",
+      "order": 0
+    },
+    {
+      "id": "design",
+      "name": "デザイン",
+      "order": 1
+    },
+    {
+      "id": "news",
+      "name": "ニュース",
+      "order": 2
+    },
+    {
+      "id": "work",
+      "name": "仕事",
+      "order": 3
+    }
   ],
   "bookmarks": [
     {
@@ -29,6 +45,14 @@
       "url": "https://figma.com",
       "description": "UIデザインツール",
       "order": 0
+    },
+    {
+      "id": "mohrbjdjokvo",
+      "genreId": "ai",
+      "title": "クロード",
+      "url": "https://claude.ai",
+      "description": "",
+      "order": 2
     }
   ]
 }
