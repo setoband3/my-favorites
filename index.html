@@ -478,7 +478,7 @@
       <div class="emoji-grid" id="emojiGrid"></div>
     </div>
     <div id="customIconWrap" style="display:none; margin-top:8px;">
-      <input type="text" id="mIcon" placeholder="絵文字を入力（例：🚀）" maxlength="2" oninput="updateIconPreview()">
+      <input type="text" id="mIcon" placeholder="絵文字（例：🚀）またはアイコンURL" oninput="updateIconPreview()">
     </div>
     <div class="modal-btns">
       <button class="btn-cancel" onclick="closeModal()">キャンセル</button>
@@ -684,6 +684,11 @@ function renderIcon(tool) {
     const fav = getFaviconUrl(tool.url);
     return `<img src="${fav}" onerror="this.parentElement.innerHTML='🔗'" alt="">`;
   }
+  if (tool.iconType === 'custom') {
+    const v = tool.icon || '';
+    if (v.startsWith('http')) return `<img src="${v}" onerror="this.parentElement.innerHTML='🔗'" alt="">`;
+    return `<span class="emoji-icon">${v || '🔗'}</span>`;
+  }
   return `<span class="emoji-icon">${tool.icon || '🔗'}</span>`;
 }
 
@@ -884,7 +889,11 @@ function updateIconPreview() {
     const fav = getFaviconUrl(document.getElementById('mUrl').value);
     p.innerHTML = fav ? `<img src="${fav}" onerror="this.parentElement.innerHTML='🔗'" alt="">` : '🔗';
   } else if (iconMode === 'emoji') p.innerHTML = selectedEmoji || '😊';
-  else p.innerHTML = document.getElementById('mIcon').value || '🔗';
+  else p.innerHTML = document.getElementById('mIcon').value
+    ? (document.getElementById('mIcon').value.startsWith('http')
+        ? `<img src="${document.getElementById('mIcon').value}" onerror="this.parentElement.innerHTML='🔗'" alt="">`
+        : document.getElementById('mIcon').value)
+    : '🔗';
 }
 
 function selectEmoji(em) {
